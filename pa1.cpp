@@ -40,7 +40,7 @@ void list::addToEnd(string text){
 int main(){
 	list docx;
 	docx.addToEnd("pls");
-	cout << "who let the dogs out" << endl;
+	
 	
 	return 0;
 }
