@@ -225,7 +225,6 @@ int main() {
 			 	docx.insert(message, singleLine);
 			 }
 
-
 			 else if (isdigit(userInput[7]) && isdigit(userInput[8])) {
 			 	sline += userInput[7];
 			 	sline += userInput[8];
@@ -234,22 +233,6 @@ int main() {
 			 	string message = userInput.substr(0, userInput.length() - 1);
 			 	docx.insert(message, doubleLine);
 			 }
-
-			// if (isdigit(userInput[7])) {
-			// sline = userInput.substr(7, 1);
-
-
-			// if (isdigit(userInput[8])) {
-			//  		sline = sline + userInput[8];
-			//  	}
-			//  }
-			//  int line = std::stoi(sline);
-
-			//  userInput = userInput.substr(10, userInput.length() - 2);
-			//  string message = userInput.substr(0, userInput.length() - 1);
-			
-
-			//  docx.insert(message, line);
 		}
 
 
@@ -261,33 +244,51 @@ int main() {
 			 	docx.deleteLine(singleLine);
 			 }
 
-
 			 else if (isdigit(userInput[7]) && isdigit(userInput[8])) {
 			 	sline += userInput[7];
 			 	sline += userInput[8];
 			 	int doubleLine = std::stoi(sline);
 			 	docx.deleteLine(doubleLine);
 			 }
-
 		}
 
 		else if (userInput.substr(0, 4) == "edit") {
 
 			string sline = "";
-			if (isdigit(userInput[5])) {
 
-				sline = userInput.substr(5, 1);
+			if (isdigit(userInput[5]) && !(isdigit(userInput[6]))) {
+			 	sline = userInput.substr(5, 1);
+			 	int singleLine = std::stoi(sline);
+			 	userInput = userInput.substr(8, userInput.length() - 2);
+			 	string message = userInput.substr(0, userInput.length() - 1);
+			 	docx.edit(message, singleLine);
+			 }
 
-				if (isdigit(userInput[6])) {
-					sline = sline + userInput[6];
-				}
-			}
-			int line = std::stoi(sline);
 
-			userInput = userInput.substr(8, userInput.length() - 2);
-			string message = userInput.substr(0, userInput.length() - 1);
+			 else if (isdigit(userInput[5]) && isdigit(userInput[6])) {
+			 	sline += userInput[5];
+			 	sline += userInput[6];
+			 	int doubleLine = std::stoi(sline);
+			 	userInput = userInput.substr(9, userInput.length() - 2);
+			 	string message = userInput.substr(0, userInput.length() - 1);
+			 	docx.insert(message, doubleLine);
+			 }
 
-			docx.edit(message, line);
+
+			// if (isdigit(userInput[5])) {
+
+			// 	sline = userInput.substr(5, 1);
+
+			// 	if (isdigit(userInput[6])) {
+			// 		sline = sline + userInput[6];
+			// 	}
+			// }
+			// int line = std::stoi(sline);
+
+			// userInput = userInput.substr(8, userInput.length() - 2);
+			// string message = userInput.substr(0, userInput.length() - 1);
+
+			// docx.edit(message, line);
 		}
 
 		else if (userInput.substr(0, 6) == "search") {
