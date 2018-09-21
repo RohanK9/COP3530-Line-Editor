@@ -24,6 +24,8 @@ public:
 	void print();
 	void insert(string text, int position);
 	void deleteLine(int position);
+	void edit(string text, int position);
+	void search(string text);
 };
 
 //method to add to the end of the linked list
@@ -54,6 +56,7 @@ void list::print(){
 		cout << "Can't print an empty list" << endl;
 		return;
 	}
+
 	int lineCount = 1;
 	curr = head;
 
@@ -62,12 +65,12 @@ void list::print(){
 		curr = curr->next;
 		lineCount++;
 	}
-
 	cout << lineCount << " " << curr->data << endl;
 }
 
 //method to insert a node into a given position in the linked list
 void list::insert(string text, int position){
+
 	node* toAdd = new node;
 	toAdd->next = NULL;
 	toAdd->data = text;
@@ -109,6 +112,7 @@ void list::insert(string text, int position){
 }
 
 void list::deleteLine(int position){
+
 	curr = head;
 	int count = 1;
 
@@ -124,15 +128,54 @@ void list::deleteLine(int position){
 	curr->next = curr->next->next;
 }
 
+void list::edit(string text, int position){
+
+	curr = head;
+	int count = 1;
+
+	if(position == 1){
+		head->data = text;
+	}
+
+	while(count < position){
+		curr = curr->next;
+		count++;
+	}
+	curr->data = text;
+}
+
+void list::search(string text){
+	curr = head;
+	int count = 1;
+	bool found = false;
+
+	while(curr != NULL){
+		if((curr->data).find(text) != string::npos){
+			cout << count << " " << curr->data << endl;
+			found = true;
+			return;
+		}
+
+		else{
+		curr = curr->next;
+		count++;
+		}
+	}
+	if(!found){
+	 	cout << "Not found" << endl;
+	 }
+}
+
 int main(){
 	list docx;
-	docx.addToEnd("line one");
-	docx.addToEnd("line two");
-	docx.addToEnd("line three");
-	docx.insert("line four", 4);
-	docx.insert("line five", 5);
-	docx.deleteLine(5);
+	docx.addToEnd("now is the time");
+	docx.addToEnd("for all good people");
+	docx.addToEnd("to come to the aid of their country");
+	docx.deleteLine(2);
 	docx.print();
+	docx.insert("for all good people", 2);
+	docx.print();
+
 	
 	return 0;
 }
