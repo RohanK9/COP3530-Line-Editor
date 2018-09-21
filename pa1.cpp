@@ -196,6 +196,17 @@ int main() {
 		//cout << "hello" << endl;
 		getline(cin, userInput);
 
+		for (int i = 0; i < userInput.length(); i++){
+			if (userInput[i] == '\"'){
+				break;
+			}
+			else if (userInput[i] == ' ' && userInput[i+1] == ' '){
+				userInput.erase(i, 1);
+				i--;
+			}
+		}
+		cout << userInput << endl;
+
 		if (userInput.substr(0, 9) == "insertEnd") {
 			userInput = userInput.substr(11, userInput.length() - 2);
 			string message = userInput.substr(0, userInput.length() - 1);
@@ -216,6 +227,7 @@ int main() {
 
 			userInput = userInput.substr(10, userInput.length() - 2);
 			string message = userInput.substr(0, userInput.length() - 1);
+			cout << message << endl;
 
 			docx.insert(message, line);
 		}
