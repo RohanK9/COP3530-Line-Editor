@@ -255,17 +255,20 @@ int main() {
 
 		else if (userInput.substr(0, 6) == "delete") {
 			string sline = "";
-			if (isdigit(userInput[7])) {
-				sline = userInput.substr(7, 1);
+			if (isdigit(userInput[7]) && !(isdigit(userInput[8]))) {
+			 	sline = userInput.substr(7, 1);
+			 	int singleLine = std::stoi(sline);
+			 	docx.deleteLine(singleLine);
+			 }
 
 
-				if (isdigit(userInput[8])) {
-					sline = sline + userInput[8];
-				}
-			}
-			int line = std::stoi(sline);
+			 else if (isdigit(userInput[7]) && isdigit(userInput[8])) {
+			 	sline += userInput[7];
+			 	sline += userInput[8];
+			 	int doubleLine = std::stoi(sline);
+			 	docx.deleteLine(doubleLine);
+			 }
 
-			docx.deleteLine(line);
 		}
 
 		else if (userInput.substr(0, 4) == "edit") {
