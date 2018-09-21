@@ -193,7 +193,7 @@ int main(){
 	bool inputCondition = true;
 
 	while(inputCondition){
-		cout << "hello" << endl;
+		//cout << "hello" << endl;
 		getline(cin, userInput);
 
 		if(userInput.substr(0, 9) == "insertEnd"){
@@ -218,6 +218,22 @@ int main(){
 			string message = userInput.substr(0, userInput.length() - 1);
 
 			docx.insert(message, line);
+		}
+
+
+		else if (userInput.substr(0, 6) == "delete"){
+			string sline = "";
+			if(isdigit(userInput[7])){
+				sline = userInput.substr(7, 1);
+				
+
+				if(isdigit(userInput[8])){
+					sline = sline + userInput[8];
+				}
+			}
+			int line = std::stoi(sline);
+
+			docx.deleteLine(line);
 		}
 
 		else if(userInput.substr(0, 5) == "print"){
