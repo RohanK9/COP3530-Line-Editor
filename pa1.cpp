@@ -4,19 +4,19 @@
 #include <stdio.h>
 using namespace std;
 
-struct node{
+struct node {
 	string data;
 	node* next;
 };
 
-class list{
+class list {
 private:
 	node* head;
 	node* tail;
 	node* curr;
 
 public:
-	list(){
+	list() {
 		head = NULL;
 		tail = NULL;
 		curr = NULL;
@@ -31,30 +31,30 @@ public:
 };
 
 //method to add to the end of the linked list
-void list::addToEnd(string text){
+void list::addToEnd(string text) {
 	//node to be added to the linked list
 	node* toAdd = new node;
 	toAdd->next = NULL;
 	toAdd->data = text;
 
-	if(head != NULL){
+	if (head != NULL) {
 		curr = head;
-		while(curr->next != NULL){
+		while (curr->next != NULL) {
 			curr = curr->next;
 		}
 		curr->next = toAdd;
 	}
 
 	//if the linked list is empty then the head becomes new node
-	else{
+	else {
 		head = toAdd;
 	}
 }
 
 //method to print the linked list with line numbers
-void list::print(){
+void list::print() {
 
-	if (head == NULL){
+	if (head == NULL) {
 		cout << "Can't print an empty list" << endl;
 		return;
 	}
@@ -62,7 +62,7 @@ void list::print(){
 	int lineCount = 1;
 	curr = head;
 
-	while(curr->next != NULL){
+	while (curr->next != NULL) {
 		cout << lineCount << " " << curr->data << endl;
 		curr = curr->next;
 		lineCount++;
@@ -71,77 +71,77 @@ void list::print(){
 }
 
 //method to insert a node into a given position in the linked list
-void list::insert(string text, int position){
+void list::insert(string text, int position) {
 
 	node* toAdd = new node;
 	toAdd->next = NULL;
 	toAdd->data = text;
 
-	if(head != NULL){
-	int lineCount = 1;
-	curr = head;
+	if (head != NULL) {
+		int lineCount = 1;
+		curr = head;
 
-	while(curr->next != NULL){
-		curr = curr->next;
-		lineCount++;
-	}
-
-	if(position > (lineCount + 1)){
-		//cout << "The given position is out of bounds" << endl;
-		return;
-	} 
-
-	curr = head;
-	int count = 1;
-
-
-	if(position == 1){
-		toAdd->next = head;
-		head = toAdd;
-		return;
-	}
-
-	else if(position > 1){
-		while(count < position - 1){
+		while (curr->next != NULL) {
 			curr = curr->next;
-			count++;
+			lineCount++;
 		}
 
-		toAdd->next = curr->next;
-		curr->next = toAdd;
-	}
+		if (position > (lineCount + 1)) {
+			//cout << "The given position is out of bounds" << endl;
+			return;
+		}
 
-	else if(position == (lineCount + 1)){
-		addToEnd(text);
+		curr = head;
+		int count = 1;
+
+
+		if (position == 1) {
+			toAdd->next = head;
+			head = toAdd;
+			return;
+		}
+
+		else if (position > 1) {
+			while (count < position - 1) {
+				curr = curr->next;
+				count++;
+			}
+
+			toAdd->next = curr->next;
+			curr->next = toAdd;
+		}
+
+		else if (position == (lineCount + 1)) {
+			addToEnd(text);
+		}
 	}
-	}
-	else{
+	else {
 		head = toAdd;
 	}
 }
 
-void list::deleteLine(int position){
+void list::deleteLine(int position) {
 
 	curr = head;
 	int lineCount = 1;
 
-	while(curr->next != NULL){
+	while (curr->next != NULL) {
 		curr = curr->next;
 		lineCount++;
 	}
 
-	if(position > lineCount){
+	if (position > lineCount) {
 		return;
 	}
 
 	curr = head;
 	int count = 1;
 
-	if (position == 1){
+	if (position == 1) {
 		head = head->next;
 	}
 
-	while(count < position - 1){
+	while (count < position - 1) {
 		curr = curr->next;
 		count++;
 	}
@@ -149,71 +149,71 @@ void list::deleteLine(int position){
 	curr->next = curr->next->next;
 }
 
-void list::edit(string text, int position){
+void list::edit(string text, int position) {
 
 	curr = head;
 	int count = 1;
 
-	if(position == 1){
+	if (position == 1) {
 		head->data = text;
 	}
 
-	while(count < position){
+	while (count < position) {
 		curr = curr->next;
 		count++;
 	}
 	curr->data = text;
 }
 
-void list::search(string text){
+void list::search(string text) {
 	curr = head;
 	int count = 1;
 	bool found = false;
 
-	while(curr != NULL){
-		if((curr->data).find(text) != string::npos){
+	while (curr != NULL) {
+		if ((curr->data).find(text) != string::npos) {
 			cout << count << " " << curr->data << endl;
-			found = true;	
+			found = true;
 		}
 
-		
+
 		curr = curr->next;
 		count++;
 	}
-	if(!found){
-	 	cout << "Not found" << endl;
-	 }
+	if (!found) {
+		cout << "not found" << endl;
+	}
 }
 
-int main(){
+int main() {
 	list docx;
-	
-	
+
+
 	string userInput = "";
 	bool inputCondition = true;
 
-	while(inputCondition){
+	while (inputCondition) {
 		//cout << "hello" << endl;
 		getline(cin, userInput);
 
-		if(userInput.substr(0, 9) == "insertEnd"){
+		if (userInput.substr(0, 9) == "insertEnd") {
 			userInput = userInput.substr(11, userInput.length() - 2);
 			string message = userInput.substr(0, userInput.length() - 1);
 			docx.addToEnd(message);
 		}
 
-		else if(userInput.substr(0, 7) == "insert "){
+		else if (userInput.substr(0, 7) == "insert ") {
 			string sline = "";
-			if(isdigit(userInput[7])){
+			if (isdigit(userInput[7])) {
 				sline = userInput.substr(7, 1);
-				
 
-				if(isdigit(userInput[8])){
+
+				if (isdigit(userInput[8])) {
 					sline = sline + userInput[8];
 				}
 			}
 			int line = std::stoi(sline);
-			
+
 			userInput = userInput.substr(10, userInput.length() - 2);
 			string message = userInput.substr(0, userInput.length() - 1);
 
@@ -221,13 +221,13 @@ int main(){
 		}
 
 
-		else if (userInput.substr(0, 6) == "delete"){
+		else if (userInput.substr(0, 6) == "delete") {
 			string sline = "";
-			if(isdigit(userInput[7])){
+			if (isdigit(userInput[7])) {
 				sline = userInput.substr(7, 1);
-				
 
-				if(isdigit(userInput[8])){
+
+				if (isdigit(userInput[8])) {
 					sline = sline + userInput[8];
 				}
 			}
@@ -236,11 +236,38 @@ int main(){
 			docx.deleteLine(line);
 		}
 
-		else if(userInput.substr(0, 5) == "print"){
+		else if (userInput.substr(0, 4) == "edit") {
+
+			string sline = "";
+			if (isdigit(userInput[5])) {
+
+				sline = userInput.substr(5, 1);
+
+				if (isdigit(userInput[6])) {
+					sline = sline + userInput[6];
+				}
+			}
+			int line = std::stoi(sline);
+
+			userInput = userInput.substr(8, userInput.length() - 2);
+			string message = userInput.substr(0, userInput.length() - 1);
+
+			docx.edit(message, line);
+		}
+
+		else if (userInput.substr(0, 6) == "search") {
+			userInput = userInput.substr(8, userInput.length() - 2);
+			string message = userInput.substr(0, userInput.length() - 1);
+
+			docx.search(message);
+		}
+
+		else if (userInput.substr(0, 5) == "print") {
+			//cout << endl;
 			docx.print();
 		}
 
-		else if(userInput.substr(0, 4) == "quit"){
+		else if (userInput.substr(0, 4) == "quit") {
 			inputCondition = false;
 			return 0;
 		}
