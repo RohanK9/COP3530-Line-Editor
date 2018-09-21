@@ -84,7 +84,7 @@ void list::insert(string text, int position){
 	}
 
 	if(position > (lineCount + 1)){
-		cout << "The given position is out of bounds" << endl;
+		//cout << "The given position is out of bounds" << endl;
 		return;
 	} 
 
@@ -112,6 +112,18 @@ void list::insert(string text, int position){
 }
 
 void list::deleteLine(int position){
+
+	curr = head;
+	int lineCount = 1;
+
+	while(curr->next != NULL){
+		curr = curr->next;
+		lineCount++;
+	}
+
+	if(position > lineCount){
+		return;
+	}
 
 	curr = head;
 	int count = 1;
@@ -166,10 +178,15 @@ void list::search(string text){
 
 int main(){
 	list docx;
-	docx.addToEnd("hello world");
-	docx.addToEnd("how are you doing");
-	docx.addToEnd("hello world");
-	docx.search("hello world");
+	docx.addToEnd("now is the time");
+	docx.addToEnd("for all good men");
+	docx.addToEnd("to come to the aid of their country");
+	docx.deleteLine(4);
+	docx.print();
+	docx.insert("Patrick Henry or Charles Weller?", 4);
+	docx.print();
+	docx.insert("it was neither", 6);
+	docx.print();
 	
 	
 
