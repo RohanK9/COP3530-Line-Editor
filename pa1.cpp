@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <ctype.h>
+#include <stdio.h>
 using namespace std;
 
 struct node{
@@ -75,6 +77,7 @@ void list::insert(string text, int position){
 	toAdd->next = NULL;
 	toAdd->data = text;
 
+	if(head != NULL){
 	int lineCount = 1;
 	curr = head;
 
@@ -91,9 +94,11 @@ void list::insert(string text, int position){
 	curr = head;
 	int count = 1;
 
+
 	if(position == 1){
 		toAdd->next = head;
 		head = toAdd;
+		return;
 	}
 
 	else if(position > 1){
@@ -108,6 +113,10 @@ void list::insert(string text, int position){
 
 	else if(position == (lineCount + 1)){
 		addToEnd(text);
+	}
+	}
+	else{
+		head = toAdd;
 	}
 }
 
@@ -178,18 +187,51 @@ void list::search(string text){
 
 int main(){
 	list docx;
-	docx.addToEnd("now is the time");
-	docx.addToEnd("for all good men");
-	docx.addToEnd("to come to the aid of their country");
-	docx.deleteLine(4);
-	docx.print();
-	docx.insert("Patrick Henry or Charles Weller?", 4);
-	docx.print();
-	docx.insert("it was neither", 6);
-	docx.print();
 	
 	
+	string userInput = "";
+	bool inputCondition = true;
 
-	
+	while(inputCondition){
+		cout << "hello" << endl;
+		getline(cin, userInput);
+
+		if(userInput.substr(0, 9) == "insertEnd"){
+			userInput = userInput.substr(11, userInput.length() - 2);
+			string message = userInput.substr(0, userInput.length() - 1);
+			docx.addToEnd(message);
+		}
+
+		else if(userInput.substr(0, 7) == "insert "){
+			string sline = "";
+			if(isdigit(userInput[7])){
+				sline = userInput.substr(7, 1);
+				
+
+				if(isdigit(userInput[8])){
+					sline = sline + userInput[8];
+				}
+			}
+			int line = std::stoi(sline);
+			
+			userInput = userInput.substr(10, userInput.length() - 2);
+			string message = userInput.substr(0, userInput.length() - 1);
+
+			docx.insert(message, line);
+		}
+
+		else if(userInput.substr(0, 5) == "print"){
+			docx.print();
+		}
+
+		else if(userInput.substr(0, 4) == "quit"){
+			inputCondition = false;
+			return 0;
+		}
+
+	}
+
+
+
 	return 0;
 }
