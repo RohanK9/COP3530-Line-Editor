@@ -214,21 +214,42 @@ int main() {
 
 		else if (userInput.substr(0, 7) == "insert ") {
 			string sline = "";
-			if (isdigit(userInput[7])) {
-				sline = userInput.substr(7, 1);
-
-
-				if (isdigit(userInput[8])) {
-					sline = sline + userInput[8];
-				}
-			}
-			int line = std::stoi(sline);
-
-			userInput = userInput.substr(10, userInput.length() - 2);
-			string message = userInput.substr(0, userInput.length() - 1);
 			
 
-			docx.insert(message, line);
+			 if (isdigit(userInput[7]) && !(isdigit(userInput[8]))) {
+			 	sline = userInput.substr(7, 1);
+
+			 	int singleLine = std::stoi(sline);
+			 	userInput = userInput.substr(10, userInput.length() - 2);
+			 	string message = userInput.substr(0, userInput.length() - 1);
+			 	docx.insert(message, singleLine);
+			 }
+
+
+			 else if (isdigit(userInput[7]) && isdigit(userInput[8])) {
+			 	sline += userInput[7];
+			 	sline += userInput[8];
+			 	int doubleLine = std::stoi(sline);
+			 	userInput = userInput.substr(11, userInput.length() - 2);
+			 	string message = userInput.substr(0, userInput.length() - 1);
+			 	docx.insert(message, doubleLine);
+			 }
+
+			// if (isdigit(userInput[7])) {
+			// sline = userInput.substr(7, 1);
+
+
+			// if (isdigit(userInput[8])) {
+			//  		sline = sline + userInput[8];
+			//  	}
+			//  }
+			//  int line = std::stoi(sline);
+
+			//  userInput = userInput.substr(10, userInput.length() - 2);
+			//  string message = userInput.substr(0, userInput.length() - 1);
+			
+
+			//  docx.insert(message, line);
 		}
 
 
@@ -281,6 +302,10 @@ int main() {
 		else if (userInput.substr(0, 4) == "quit") {
 			inputCondition = false;
 			return 0;
+		}
+
+		else {
+			cout << "Invalid input. Please try again." << endl;
 		}
 
 	}
