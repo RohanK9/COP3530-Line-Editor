@@ -152,14 +152,12 @@ void list::search(string text){
 	while(curr != NULL){
 		if((curr->data).find(text) != string::npos){
 			cout << count << " " << curr->data << endl;
-			found = true;
-			return;
+			found = true;	
 		}
 
-		else{
+		
 		curr = curr->next;
 		count++;
-		}
 	}
 	if(!found){
 	 	cout << "Not found" << endl;
@@ -168,13 +166,12 @@ void list::search(string text){
 
 int main(){
 	list docx;
-	docx.addToEnd("now is the time");
-	docx.addToEnd("for all good people");
-	docx.addToEnd("to come to the aid of their country");
-	docx.deleteLine(2);
-	docx.print();
-	docx.insert("for all good people", 2);
-	docx.print();
+	docx.addToEnd("hello world");
+	docx.addToEnd("how are you doing");
+	docx.addToEnd("hello world");
+	docx.search("hello world");
+	
+	
 
 	
 	return 0;
