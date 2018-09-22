@@ -12,13 +12,11 @@ struct node {
 class list {
 private:
 	node* head;
-	node* tail;
 	node* curr;
 
 public:
 	list() {
 		head = NULL;
-		tail = NULL;
 		curr = NULL;
 	}
 
